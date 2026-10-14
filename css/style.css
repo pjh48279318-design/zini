@@ -1,0 +1,618 @@
+/* ===== 색상·간격 변수 (자연·수채화 테마) ===== */
+:root {
+  --color-sky: #a8d8ea;
+  --color-sky-deep: #7fbcd6;
+  --color-forest: #6b9e78;
+  --color-forest-deep: #4f7f5c;
+  --color-hill-far: #b9d8a8;
+  --color-hill-near: #8fbf8a;
+  --color-bg: #fbf7ef;
+  --color-surface: #fffdf8;
+  --color-text: #4a3f35;
+  --color-muted: #85776a;
+  --color-accent: #e8a87c;
+  --color-accent-text: #b3653a;
+  --color-border: #eadfcd;
+  --color-code-bg: #f3ece0;
+  --color-quote-bg: #eef5ec;
+  --shadow-card: 0 2px 4px rgba(74, 63, 53, 0.06), 0 8px 24px rgba(74, 63, 53, 0.08);
+  --shadow-card-hover: 0 4px 8px rgba(74, 63, 53, 0.08), 0 14px 32px rgba(74, 63, 53, 0.12);
+
+  --font-sans: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", "맑은 고딕", "Noto Sans KR", sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Consolas, "D2Coding", monospace;
+
+  --radius: 18px;
+  --gutter: 16px;
+  --content-width: 720px;
+
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-sky: #2c4a66;
+    --color-sky-deep: #1f2a38;
+    --color-forest: #8fc29b;
+    --color-forest-deep: #a9d4b2;
+    --color-hill-far: #2e4a3c;
+    --color-hill-near: #243b30;
+    --color-bg: #1f2a38;
+    --color-surface: #26344a;
+    --color-text: #f3ead8;
+    --color-muted: #b8c4d0;
+    --color-accent: #f0b98f;
+    --color-accent-text: #f0b98f;
+    --color-border: #34465e;
+    --color-code-bg: #1a2431;
+    --color-quote-bg: #253b3a;
+    --shadow-card: 0 2px 4px rgba(0, 0, 0, 0.2), 0 8px 24px rgba(0, 0, 0, 0.25);
+    --shadow-card-hover: 0 4px 8px rgba(0, 0, 0, 0.25), 0 14px 32px rgba(0, 0, 0, 0.35);
+    color-scheme: dark;
+  }
+}
+
+/* ===== 기본 ===== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.7;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+
+a {
+  color: var(--color-forest-deep);
+}
+
+a:focus-visible,
+.button:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ===== 헤더: 하늘 그라데이션 + 구름 + 언덕 ===== */
+.site-header {
+  position: relative;
+  overflow: hidden;
+  padding: 40px var(--gutter) 72px;
+  background: linear-gradient(180deg, var(--color-sky) 0%, var(--color-sky) 30%, var(--color-bg) 100%);
+  text-align: center;
+}
+
+/* 구름 */
+.site-header::before,
+.site-header::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.7);
+  filter: blur(6px);
+  box-shadow:
+    40px -12px 0 6px rgba(255, 255, 255, 0.7),
+    80px 0 0 -2px rgba(255, 255, 255, 0.7);
+}
+
+.site-header::before {
+  top: 22px;
+  left: 6%;
+  width: 70px;
+  height: 30px;
+}
+
+.site-header::after {
+  top: 56px;
+  right: 18%;
+  width: 54px;
+  height: 22px;
+  opacity: 0.8;
+}
+
+@media (prefers-color-scheme: dark) {
+  /* 밤에는 구름 대신 은은한 별빛 */
+  .site-header::before,
+  .site-header::after {
+    width: 3px;
+    height: 3px;
+    filter: none;
+    background: #fff8e1;
+    box-shadow:
+      60px 20px 0 0 rgba(255, 248, 225, 0.8),
+      140px -4px 0 0 rgba(255, 248, 225, 0.6),
+      220px 30px 0 0 rgba(255, 248, 225, 0.9),
+      300px 8px 0 0 rgba(255, 248, 225, 0.5);
+  }
+}
+
+.site-header-inner {
+  position: relative;
+  z-index: 1;
+}
+
+.site-title {
+  display: inline-block;
+  color: var(--color-text);
+  font-size: 1.75rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  text-decoration: none;
+}
+
+.site-title::before {
+  content: "🍃 ";
+}
+
+.site-tagline {
+  margin: 6px 0 0;
+  color: var(--color-muted);
+  font-size: 0.95rem;
+}
+
+/* 언덕: 겹친 타원 그라데이션 */
+.hills {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 70px;
+  background:
+    radial-gradient(ellipse 45% 70px at 20% 100%, var(--color-hill-near) 98%, transparent 100%),
+    radial-gradient(ellipse 40% 60px at 75% 100%, var(--color-hill-near) 98%, transparent 100%),
+    radial-gradient(ellipse 60% 55px at 50% 100%, var(--color-hill-far) 98%, transparent 100%),
+    linear-gradient(transparent 82%, var(--color-hill-near) 82%);
+  opacity: 0.85;
+}
+
+/* ===== 본문 컨테이너 ===== */
+.container {
+  flex: 1;
+  width: 100%;
+  max-width: calc(var(--content-width) + var(--gutter) * 2);
+  margin: 0 auto;
+  padding: 24px var(--gutter) 48px;
+  outline: none;
+}
+
+/* ===== 글 목록 카드 ===== */
+.post-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+.post-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 22px 20px 18px;
+  background:
+    radial-gradient(circle at 100% 0%, rgba(168, 216, 234, 0.18), transparent 45%),
+    radial-gradient(circle at 0% 100%, rgba(107, 158, 120, 0.12), transparent 50%),
+    var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.post-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.post-card-emoji {
+  font-size: 2.25rem;
+  line-height: 1;
+  margin-bottom: 12px;
+}
+
+.post-card-title {
+  margin: 0 0 4px;
+  font-size: 1.2rem;
+  line-height: 1.45;
+}
+
+.post-card-title a {
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+/* 카드 전체를 클릭 영역으로 */
+.post-card-title a::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius);
+}
+
+.post-card-summary {
+  flex: 1;
+  margin: 8px 0 12px;
+  color: var(--color-muted);
+  font-size: 0.95rem;
+}
+
+.post-date {
+  color: var(--color-muted);
+  font-size: 0.875rem;
+}
+
+/* ===== 태그 ===== */
+.tag-list {
+  position: relative;
+  z-index: 1; /* 카드 링크 위에서도 태그를 누를 수 있게 */
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 14px;
+  border-radius: 999px;
+  background: var(--color-quote-bg);
+  color: var(--color-forest-deep);
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+
+.tag:hover {
+  background: var(--color-hill-far);
+}
+
+.list-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.list-heading h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: var(--color-forest-deep);
+}
+
+/* ===== 버튼 ===== */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 20px;
+  border-radius: 999px;
+  background: var(--color-forest);
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.button-ghost {
+  background: transparent;
+  color: var(--color-forest-deep);
+  border: 1.5px solid var(--color-forest);
+}
+
+@media (prefers-color-scheme: dark) {
+  .button {
+    color: #1f2a38;
+  }
+
+  .button-ghost {
+    color: var(--color-forest-deep);
+  }
+}
+
+/* ===== 상태 (로딩·오류) ===== */
+.status {
+  padding: 48px 0;
+  color: var(--color-muted);
+  text-align: center;
+}
+
+.status-emoji {
+  font-size: 3rem;
+}
+
+/* ===== 글 본문 ===== */
+.post-header {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 2px dashed var(--color-border);
+  text-align: center;
+}
+
+.post-header .tag-list {
+  justify-content: center;
+  margin-top: 12px;
+}
+
+.post-emoji {
+  font-size: 3rem;
+  line-height: 1;
+}
+
+.post-title {
+  margin: 12px 0 6px;
+  font-size: 1.6rem;
+  line-height: 1.4;
+  letter-spacing: -0.02em;
+}
+
+.post-content {
+  font-size: 1.0625rem;
+  line-height: 1.8;
+}
+
+.post-content h2,
+.post-content h3,
+.post-content h4 {
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+}
+
+.post-content h2 {
+  margin: 2.2em 0 0.8em;
+  padding-left: 12px;
+  border-left: 5px solid var(--color-forest);
+  font-size: 1.35rem;
+}
+
+.post-content h3 {
+  margin: 1.8em 0 0.6em;
+  color: var(--color-forest-deep);
+  font-size: 1.15rem;
+}
+
+.post-content p,
+.post-content ul,
+.post-content ol {
+  margin: 0 0 1.2em;
+}
+
+.post-content ul,
+.post-content ol {
+  padding-left: 1.4em;
+}
+
+.post-content li {
+  margin-bottom: 0.4em;
+}
+
+.post-content li > ul,
+.post-content li > ol {
+  margin: 0.4em 0 0;
+}
+
+.post-content li::marker {
+  color: var(--color-forest);
+}
+
+.post-content strong {
+  background: linear-gradient(transparent 62%, rgba(232, 168, 124, 0.35) 62%);
+}
+
+.post-content a {
+  text-underline-offset: 3px;
+}
+
+.post-content blockquote {
+  margin: 1.5em 0;
+  padding: 14px 18px;
+  border-left: 4px solid var(--color-forest);
+  border-radius: 0 12px 12px 0;
+  background: var(--color-quote-bg);
+}
+
+.post-content blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+.post-content hr {
+  margin: 2.5em auto;
+  border: 0;
+  text-align: center;
+}
+
+.post-content hr::after {
+  content: "🍃  🍃  🍃";
+  color: var(--color-forest);
+  letter-spacing: 0.5em;
+}
+
+.post-content code {
+  padding: 0.15em 0.4em;
+  border-radius: 6px;
+  background: var(--color-code-bg);
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+}
+
+.post-content pre {
+  margin: 1.5em 0;
+  padding: 16px;
+  overflow-x: auto;
+  border-radius: 12px;
+  background: var(--color-code-bg);
+  line-height: 1.6;
+}
+
+.post-content pre code {
+  padding: 0;
+  background: none;
+  white-space: pre;
+  overflow-wrap: normal;
+}
+
+/* 표는 자체 가로 스크롤 */
+.table-wrap {
+  margin: 1.5em 0;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+}
+
+.post-content table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  word-break: keep-all;
+  overflow-wrap: normal;
+}
+
+.post-content th,
+.post-content td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--color-border);
+  text-align: left;
+  vertical-align: top;
+}
+
+.post-content th {
+  background: var(--color-quote-bg);
+  white-space: nowrap;
+}
+
+.post-content tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.post-content td:first-child {
+  white-space: nowrap;
+}
+
+/* ===== 이전/다음 글 ===== */
+.post-nav {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin-top: 48px;
+}
+
+.post-nav-link {
+  display: block;
+  padding: 14px 18px;
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.post-nav-link span {
+  display: block;
+  color: var(--color-muted);
+  font-size: 0.8rem;
+  font-weight: 400;
+}
+
+.post-nav-link.next {
+  text-align: right;
+}
+
+.back-link {
+  margin-top: 24px;
+  text-align: center;
+}
+
+/* ===== 푸터 ===== */
+.site-footer {
+  padding: 24px var(--gutter);
+  background: var(--color-hill-near);
+  color: var(--color-text);
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+.site-footer p {
+  max-width: var(--content-width);
+  margin: 0 auto;
+}
+
+/* ===== 넓은 화면 ===== */
+@media (min-width: 768px) {
+  :root {
+    --gutter: 32px;
+  }
+
+  .site-header {
+    padding: 56px var(--gutter) 96px;
+  }
+
+  .site-title {
+    font-size: 2.25rem;
+  }
+
+  .hills {
+    height: 96px;
+  }
+
+  .container {
+    padding-top: 32px;
+  }
+
+  .post-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  .post-title {
+    font-size: 2rem;
+  }
+
+  .post-nav {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .post-card {
+    transition: none;
+  }
+
+  .post-card:hover {
+    transform: none;
+  }
+}
